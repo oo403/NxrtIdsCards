@@ -1,0 +1,48 @@
+**/run/
+!**/run/log4j2-debug.xml
+target/
+
+.kotlin/
+
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!paper/src/main/**/build/
+!paper/src/test/**/build/
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+out/
+!paper/src/main/**/out/
+!paper/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!paper/src/main/**/bin/
+!paper/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
