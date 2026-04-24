@@ -28,6 +28,10 @@ class InventoryUtil @Inject constructor(
             .rows(rows)
             .create()
 
+        gui.setDefaultClickAction { event ->
+            event.isCancelled = true
+        }
+
         items.forEach { (id, item) ->
             val material: Material = Material.matchMaterial(item.material) ?: throw IllegalArgumentException("Material ${item.material} not found!")
             val itemStack = ItemStack(material, item.amount)
