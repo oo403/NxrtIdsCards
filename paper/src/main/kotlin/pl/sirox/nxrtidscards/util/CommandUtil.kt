@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import dev.rollczi.litecommands.LiteCommands
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory
 import org.bukkit.command.CommandSender
+import pl.sirox.common.configuration.GeneralConfiguration
 import pl.sirox.common.enums.ConfigurationFiles
 import pl.sirox.common.logging.LoggerFactory
 import pl.sirox.common.logging.logger
@@ -13,7 +14,8 @@ import pl.sirox.nxrtidscards.interfaces.CustomCommand
 
 class CommandUtil @Inject constructor(
     private val loggerFactory: LoggerFactory,
-    private val commands: Set<CustomCommand>
+    private val commands: Set<CustomCommand>,
+    private val generalConfiguration: GeneralConfiguration
 ) {
 
     private lateinit var liteCommands: LiteCommands<CommandSender>
@@ -27,11 +29,13 @@ class CommandUtil @Inject constructor(
                 .argument(ConfigurationFiles::class.java, ConfigurationFilesArgument())
                 .build()
 
-            logger.info("Registering commands...")
-            logger.info("Commands registered ${commands.count()}:")
+            if (generalConfiguration.debug) logger.info("Registering commands...")
+            if (generalConfiguration.debug) logger.info("Commands registered ${commands.count()}:")
 
-            commands.forEach {
-                logger.info(" - ${it.javaClass.simpleName}")
+            if (generalConfiguration.debug) {
+                commands.forEach {
+                    logger.info(" - ${it.javaClass.simpleName}")
+                }
             }
         } catch (e: Exception) {
             logger.error("Failed to register commands!", e)
@@ -41,11 +45,11 @@ class CommandUtil @Inject constructor(
 
     fun unregister() {
         if (::liteCommands.isInitialized) {
-            logger.info("Unregistering commands...")
+            if (generalConfiguration.debug) logger.info("Unregistering commands...")
 
             liteCommands.unregister()
 
-            logger.info("Commands unregistered!")
+            if (generalConfiguration.debug) logger.info("Commands unregistered!")
         }
     }
 }
