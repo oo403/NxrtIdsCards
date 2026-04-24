@@ -21,7 +21,7 @@ class Bootstrap : JavaPlugin() {
             )
 
             loggerFactory = injector.getInstance(LoggerFactory::class.java)
-            logger = loggerFactory.logger<Bootstrap>()
+            logger = loggerFactory.logger<Bootstrap>("NxtrIdCards")
 
         } catch (e: Exception) {
             e.printStackTrace()
