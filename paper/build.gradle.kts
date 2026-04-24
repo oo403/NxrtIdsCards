@@ -15,6 +15,8 @@ dependencies {
     implementation("com.eternalcode:multification-paper:1.2.4")
     implementation("com.eternalcode:multification-okaeri:1.2.4")
 
+    implementation("dev.triumphteam:triumph-gui:3.1.13")
+
     implementation(project(":common"))
 }
 
