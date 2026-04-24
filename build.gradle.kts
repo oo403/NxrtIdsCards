@@ -22,6 +22,10 @@ subprojects {
         maven("https://repo.okaeri.cloud/releases") {
             name = "okaeri-repo"
         }
+
+        maven("https://repo.panda-lang.org/releases") {
+            name = "panda-repo"
+        }
     }
 
     apply {
