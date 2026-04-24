@@ -6,6 +6,7 @@ import eu.okaeri.configs.ConfigManager
 import eu.okaeri.configs.serdes.commons.SerdesCommons
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer
 import pl.sirox.common.configuration.GeneralConfiguration
+import pl.sirox.common.configuration.InventoryConfiguration
 import pl.sirox.common.configuration.MessagesConfiguration
 import pl.sirox.common.util.MultificationUtil
 import java.io.File
@@ -16,6 +17,7 @@ class ConfigurationModule(
 
     val generalConfigurationFile = File(dataFolder, "general.yml")
     val messagesConfigurationFile = File(dataFolder, "messages.yml")
+    val inventoryConfigurationFile = File(dataFolder, "inventory.yml")
 
     private val multification = MultificationUtil(MessagesConfiguration())
 
@@ -40,8 +42,19 @@ class ConfigurationModule(
             init.load(true)
         })
 
+        val inventoryConfiguration = ConfigManager.create(InventoryConfiguration::class.java, { init ->
+            init.configure { conf ->
+                conf.configurer(YamlBukkitConfigurer())
+                conf.bindFile(inventoryConfigurationFile)
+                conf.removeOrphans(true)
+            }
+            init.saveDefaults()
+            init.load(true)
+        })
+
         bind(GeneralConfiguration::class.java).toInstance(generalConfiguration)
         bind(MessagesConfiguration::class.java).toInstance(messageConfiguration)
+        bind(InventoryConfiguration::class.java).toInstance(inventoryConfiguration)
     }
 
 }
