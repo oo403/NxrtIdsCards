@@ -26,6 +26,10 @@ subprojects {
         maven("https://repo.panda-lang.org/releases") {
             name = "panda-repo"
         }
+
+        maven("https://repo.eternalcode.pl/releases") {
+            name = "eternalcode-repo"
+        }
     }
 
     apply {

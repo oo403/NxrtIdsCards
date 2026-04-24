@@ -1,9 +1,13 @@
 package pl.sirox.common.module
 
+import com.eternalcode.multification.okaeri.MultificationSerdesPack
 import com.google.inject.AbstractModule
 import eu.okaeri.configs.ConfigManager
+import eu.okaeri.configs.serdes.commons.SerdesCommons
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer
 import pl.sirox.common.configuration.GeneralConfiguration
+import pl.sirox.common.configuration.MessagesConfiguration
+import pl.sirox.common.util.MultificationUtil
 import java.io.File
 
 class ConfigurationModule(
@@ -11,6 +15,9 @@ class ConfigurationModule(
 ) : AbstractModule() {
 
     val generalConfigurationFile = File(dataFolder, "general.yml")
+    val messagesConfigurationFile = File(dataFolder, "messages.yml")
+
+    private val multification = MultificationUtil(MessagesConfiguration())
 
     override fun configure() {
         val generalConfiguration = ConfigManager.create(GeneralConfiguration::class.java, { init ->
@@ -20,10 +27,21 @@ class ConfigurationModule(
                 conf.removeOrphans(true)
             }
             init.saveDefaults()
-            init.load()
+            init.load(true)
+        })
+
+        val messageConfiguration = ConfigManager.create(MessagesConfiguration::class.java, { init ->
+            init.configure { conf ->
+                conf.configurer(YamlBukkitConfigurer(), MultificationSerdesPack(multification))
+                conf.bindFile(messagesConfigurationFile)
+                conf.removeOrphans(true)
+            }
+            init.saveDefaults()
+            init.load(true)
         })
 
         bind(GeneralConfiguration::class.java).toInstance(generalConfiguration)
+        bind(MessagesConfiguration::class.java).toInstance(messageConfiguration)
     }
 
 }

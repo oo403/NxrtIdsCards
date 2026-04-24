@@ -3,4 +3,7 @@ dependencies {
 
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("com.google.inject:guice:7.0.0")
+
+    implementation("com.eternalcode:multification-paper:1.2.4")
+    implementation("com.eternalcode:multification-okaeri:1.2.4")
 }

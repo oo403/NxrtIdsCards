@@ -12,6 +12,9 @@ dependencies {
 
     implementation("dev.rollczi:litecommands-bukkit:3.10.9")
 
+    implementation("com.eternalcode:multification-paper:1.2.4")
+    implementation("com.eternalcode:multification-okaeri:1.2.4")
+
     implementation(project(":common"))
 }
 
