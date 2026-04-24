@@ -9,13 +9,13 @@ import dev.rollczi.litecommands.suggestion.SuggestionResult
 import org.bukkit.command.CommandSender
 import pl.sirox.common.enums.ConfigurationFiles
 
-class ConfigurationFilesArgument : ArgumentResolver<CommandSender, ConfigurationFiles>() {
+class ConfigurationFilesArgument : ArgumentResolver<CommandSender, ConfigurationFiles?>() {
 
     override fun parse(
         invocation: Invocation<CommandSender?>?,
         context: Argument<ConfigurationFiles?>?,
         argument: String?
-    ): ParseResult<ConfigurationFiles> {
+    ): ParseResult<ConfigurationFiles?> {
         val configurationFile = ConfigurationFiles.valueOf(argument!!)
 
         return ParseResult.success(configurationFile)

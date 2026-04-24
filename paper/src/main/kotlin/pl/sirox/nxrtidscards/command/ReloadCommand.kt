@@ -5,6 +5,7 @@ import dev.rollczi.litecommands.annotations.argument.Arg
 import dev.rollczi.litecommands.annotations.command.Command
 import dev.rollczi.litecommands.annotations.context.Context
 import dev.rollczi.litecommands.annotations.execute.Execute
+import dev.rollczi.litecommands.annotations.optional.OptionalArg
 import org.bukkit.entity.Player
 import pl.sirox.common.enums.ConfigurationFiles
 import pl.sirox.common.util.ConfigurationUtil
@@ -16,8 +17,8 @@ class ReloadCommand @Inject constructor(
 ) : CustomCommand {
 
     @Execute(name = "reload")
-    fun executeReload(@Context player: Player, @Arg configuration: ConfigurationFiles) {
-        if (configuration == ConfigurationFiles.ALL) {
+    fun executeReload(@Context player: Player, @OptionalArg configuration: ConfigurationFiles?) {
+        if (configuration == null) {
             configurationUtil.reloadConfigurations()
         } else {
             configurationUtil.reloadConfiguration(configuration)
