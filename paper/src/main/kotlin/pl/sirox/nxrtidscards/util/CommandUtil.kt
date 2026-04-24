@@ -4,8 +4,10 @@ import com.google.inject.Inject
 import dev.rollczi.litecommands.LiteCommands
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory
 import org.bukkit.command.CommandSender
+import pl.sirox.common.enums.ConfigurationFiles
 import pl.sirox.common.logging.LoggerFactory
 import pl.sirox.common.logging.logger
+import pl.sirox.nxrtidscards.argument.ConfigurationFilesArgument
 import pl.sirox.nxrtidscards.bootstrap.Bootstrap
 import pl.sirox.nxrtidscards.interfaces.CustomCommand
 
@@ -21,6 +23,8 @@ class CommandUtil @Inject constructor(
     fun register(plugin: Bootstrap) {
         try {
             this.liteCommands = LiteBukkitFactory.builder("nxrtidscards", plugin)
+                .commands(commands)
+                .argument(ConfigurationFiles::class.java, ConfigurationFilesArgument())
                 .build()
 
             logger.info("Registering commands...")
