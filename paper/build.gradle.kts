@@ -6,6 +6,8 @@ plugins {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
 
+    compileOnly("me.clip:placeholderapi:2.12.2")
+
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("com.google.inject:guice:7.0.0")
     implementation("org.reflections:reflections:0.10.2")

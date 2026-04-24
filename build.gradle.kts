@@ -30,6 +30,10 @@ subprojects {
         maven("https://repo.eternalcode.pl/releases") {
             name = "eternalcode-repo"
         }
+
+        maven("https://repo.extendedclip.com/releases/") {
+            name = "extendedclip-repo"
+        }
     }
 
     apply {

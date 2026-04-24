@@ -5,6 +5,7 @@ import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
 import dev.triumphteam.gui.guis.Gui.gui
 import dev.triumphteam.gui.guis.GuiItem
+import me.clip.placeholderapi.PlaceholderAPI
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import org.bukkit.Material
@@ -24,7 +25,10 @@ class InventoryUtil @Inject constructor(
 
     fun buildIdInventory(owner: Player): Gui {
         val gui = Gui.gui()
-            .title(mini.deserialize(title, Placeholder.parsed("player", owner.name)))
+            .title(mini.deserialize(
+                PlaceholderAPI.setPlaceholders(owner, title),
+                Placeholder.parsed("player", owner.name))
+            )
             .rows(rows)
             .create()
 
