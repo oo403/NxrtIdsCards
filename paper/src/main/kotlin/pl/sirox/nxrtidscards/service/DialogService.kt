@@ -89,7 +89,7 @@ class DialogService @Inject constructor(
                 )
         }
 
-        if (playerService.getName(target.uniqueId) != null) {
+        if (playerService.getName(target.uniqueId) == null) {
             target.showDialog(dialog)
         } else {
             return
