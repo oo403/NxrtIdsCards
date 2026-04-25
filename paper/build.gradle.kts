@@ -19,6 +19,12 @@ dependencies {
 
     implementation("dev.triumphteam:triumph-gui:3.1.13")
 
+    implementation("com.zaxxer:HikariCP:7.0.2")
+    implementation("com.mysql:mysql-connector-j:8.4.0")
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.4.1")
+    implementation("org.postgresql:postgresql:42.7.3")
+    implementation("com.h2database:h2:2.2.224")
+
     implementation(project(":common"))
 }
 

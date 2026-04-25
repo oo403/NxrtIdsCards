@@ -9,7 +9,9 @@ import pl.sirox.common.logging.logger
 import pl.sirox.common.module.ConfigurationModule
 import pl.sirox.nxrtidscards.module.CommandModule
 import pl.sirox.nxrtidscards.module.EventModule
+import pl.sirox.nxrtidscards.module.PluginModule
 import pl.sirox.nxrtidscards.service.CommandService
+import pl.sirox.nxrtidscards.service.DatabaseService
 import pl.sirox.nxrtidscards.service.EventService
 
 class Bootstrap : JavaPlugin() {
@@ -19,14 +21,24 @@ class Bootstrap : JavaPlugin() {
     private lateinit var logger: Logger
     private lateinit var commands: CommandService
     private lateinit var events: EventService
+    private lateinit var databaseService: DatabaseService
 
     override fun onLoad() {
         try {
             injector = Guice.createInjector(
                 ConfigurationModule(this.dataFolder),
+                PluginModule(this),
                 CommandModule(),
                 EventModule()
             )
+
+
+            databaseService = injector.getInstance(DatabaseService::class.java)
+
+            if (::databaseService.isInitialized) {
+                databaseService.register()
+                databaseService.createTables()
+            }
 
             loggerFactory = injector.getInstance(LoggerFactory::class.java)
             logger = loggerFactory.logger<Bootstrap>("NxtrIdCards")
@@ -54,12 +66,18 @@ class Bootstrap : JavaPlugin() {
             events.register(this)
         }
 
+        databaseService.autoDataSave()
+
         logger.info("NxtrIdCards is enabled!")
     }
 
     override fun onDisable() {
         if (::commands.isInitialized) {
             commands.unregister()
+        }
+
+        if (::databaseService.isInitialized) {
+            databaseService.unregister()
         }
 
         logger.info("NxtrIdCards is disabled!")
