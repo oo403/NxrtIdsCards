@@ -8,14 +8,14 @@ import pl.sirox.common.logging.LoggerFactory
 import pl.sirox.common.logging.logger
 import pl.sirox.common.module.ConfigurationModule
 import pl.sirox.nxrtidscards.module.CommandModule
-import pl.sirox.nxrtidscards.util.CommandUtil
+import pl.sirox.nxrtidscards.service.CommandService
 
 class Bootstrap : JavaPlugin() {
 
     private lateinit var injector: Injector
     private lateinit var loggerFactory: LoggerFactory
     private lateinit var logger: Logger
-    private lateinit var commands: CommandUtil
+    private lateinit var commands: CommandService
 
     override fun onLoad() {
         try {
@@ -27,7 +27,7 @@ class Bootstrap : JavaPlugin() {
             loggerFactory = injector.getInstance(LoggerFactory::class.java)
             logger = loggerFactory.logger<Bootstrap>("NxtrIdCards")
 
-            commands = injector.getInstance(CommandUtil::class.java)
+            commands = injector.getInstance(CommandService::class.java)
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -39,6 +39,10 @@ class Bootstrap : JavaPlugin() {
 
         if (this.server.pluginManager.getPlugin("PlaceholderAPI") == null) {
             logger.error("PlaceholderAPI is not installed, may cause errors!")
+        }
+
+        if (this.server.pluginManager.getPlugin("FancyDialogs") == null) {
+            logger.error("FancyDialogs is not installed, may cause errors!")
         }
 
         if (::commands.isInitialized) {
