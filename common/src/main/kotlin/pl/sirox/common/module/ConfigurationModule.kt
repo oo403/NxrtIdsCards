@@ -4,6 +4,7 @@ import com.eternalcode.multification.okaeri.MultificationSerdesPack
 import com.google.inject.AbstractModule
 import eu.okaeri.configs.ConfigManager
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer
+import pl.sirox.common.configuration.DatabaseConfiguration
 import pl.sirox.common.configuration.DialogConfiguration
 import pl.sirox.common.configuration.GeneralConfiguration
 import pl.sirox.common.configuration.InventoryConfiguration
@@ -19,6 +20,7 @@ class ConfigurationModule(
     val messagesConfigurationFile = File(dataFolder, "messages.yml")
     val inventoryConfigurationFile = File(dataFolder, "inventory.yml")
     val dialogConfigurationFile = File(dataFolder, "dialog.yml")
+    val databaseConfigurationFile = File(dataFolder, "database.yml")
 
     private val multification = MultificationService(MessagesConfiguration())
 
@@ -63,10 +65,21 @@ class ConfigurationModule(
             init.load(true)
         })
 
+        val databaseConfiguration = ConfigManager.create(DatabaseConfiguration::class.java, { init ->
+            init.configure { conf ->
+                conf.configurer(YamlBukkitConfigurer())
+                conf.bindFile(databaseConfigurationFile)
+                conf.removeOrphans(true)
+            }
+            init.saveDefaults()
+            init.load(true)
+        })
+
         bind(GeneralConfiguration::class.java).toInstance(generalConfiguration)
         bind(MessagesConfiguration::class.java).toInstance(messageConfiguration)
         bind(InventoryConfiguration::class.java).toInstance(inventoryConfiguration)
         bind(DialogConfiguration::class.java).toInstance(dialogConfiguration)
+        bind(DatabaseConfiguration::class.java).toInstance(databaseConfiguration)
     }
 
 }
