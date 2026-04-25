@@ -43,6 +43,10 @@ tasks {
                 jvmArgs("-javaagent:${debugAgent.absolutePath}")
             }
         }
+
+        downloadPlugins {
+            modrinth("placeholderapi", "2.12.2")
+        }
     }
 
     build {

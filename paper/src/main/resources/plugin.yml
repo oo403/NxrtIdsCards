@@ -2,3 +2,4 @@ name: NxrtIdsCards
 version: '1.0'
 main: pl.sirox.nxrtidscards.bootstrap.Bootstrap
 api-version: '1.21'
+depend: ["PlaceholderAPI"]

@@ -37,6 +37,10 @@ class Bootstrap : JavaPlugin() {
     override fun onEnable() {
         logger.info("NxtrIdCards is starting...")
 
+        if (this.server.pluginManager.getPlugin("PlaceholderAPI") == null) {
+            logger.error("PlaceholderAPI is not installed, may cause errors!")
+        }
+
         if (::commands.isInitialized) {
             commands.register(this)
         }
