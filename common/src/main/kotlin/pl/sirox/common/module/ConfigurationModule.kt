@@ -5,6 +5,7 @@ import com.google.inject.AbstractModule
 import eu.okaeri.configs.ConfigManager
 import eu.okaeri.configs.serdes.commons.SerdesCommons
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer
+import pl.sirox.common.configuration.DialogConfiguration
 import pl.sirox.common.configuration.GeneralConfiguration
 import pl.sirox.common.configuration.InventoryConfiguration
 import pl.sirox.common.configuration.MessagesConfiguration
@@ -18,6 +19,7 @@ class ConfigurationModule(
     val generalConfigurationFile = File(dataFolder, "general.yml")
     val messagesConfigurationFile = File(dataFolder, "messages.yml")
     val inventoryConfigurationFile = File(dataFolder, "inventory.yml")
+    val dialogConfigurationFile = File(dataFolder, "dialog.yml")
 
     private val multification = MultificationUtil(MessagesConfiguration())
 
@@ -52,9 +54,20 @@ class ConfigurationModule(
             init.load(true)
         })
 
+        val dialogConfiguration = ConfigManager.create(DialogConfiguration::class.java, { init ->
+            init.configure { conf ->
+                conf.configurer(YamlBukkitConfigurer())
+                conf.bindFile(dialogConfigurationFile)
+                conf.removeOrphans(true)
+            }
+            init.saveDefaults()
+            init.load(true)
+        })
+
         bind(GeneralConfiguration::class.java).toInstance(generalConfiguration)
         bind(MessagesConfiguration::class.java).toInstance(messageConfiguration)
         bind(InventoryConfiguration::class.java).toInstance(inventoryConfiguration)
+        bind(DialogConfiguration::class.java).toInstance(dialogConfiguration)
     }
 
 }
