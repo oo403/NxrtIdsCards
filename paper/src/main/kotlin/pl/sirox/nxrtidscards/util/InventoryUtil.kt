@@ -44,6 +44,16 @@ class InventoryUtil @Inject constructor(
 
             item.slots.forEach { slot ->
                 gui.setItem(slot, guiItem)
+
+                item.action?.let { action ->
+                    when (action.actionType) {
+                        "close" -> {
+                            gui.addSlotAction(slot) { event ->
+                                gui.close(event.whoClicked)
+                            }
+                        }
+                    }
+                }
             }
         }
 

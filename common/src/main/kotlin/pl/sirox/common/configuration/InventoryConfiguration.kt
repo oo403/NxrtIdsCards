@@ -13,6 +13,10 @@ class InventoryConfiguration : OkaeriConfig() {
             slots = listOf(0)
             material = "minecraft:barrier"
             amount = 1
+            action = InventoryAction().apply {
+                actionType = "close"
+                actionValue = ""
+            }
         }
     )
 
@@ -20,6 +24,12 @@ class InventoryConfiguration : OkaeriConfig() {
         var slots: List<Int> = listOf(0)
         var material: String = "minecraft:diamond_sword"
         var amount: Int = 1
+        var action: InventoryAction? = null
+    }
+
+    class InventoryAction : OkaeriConfig() {
+        var actionType: String = ""
+        var actionValue: String = ""
     }
 
 }
