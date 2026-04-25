@@ -8,7 +8,9 @@ import pl.sirox.common.logging.LoggerFactory
 import pl.sirox.common.logging.logger
 import pl.sirox.common.module.ConfigurationModule
 import pl.sirox.nxrtidscards.module.CommandModule
+import pl.sirox.nxrtidscards.module.EventModule
 import pl.sirox.nxrtidscards.service.CommandService
+import pl.sirox.nxrtidscards.service.EventService
 
 class Bootstrap : JavaPlugin() {
 
@@ -16,18 +18,21 @@ class Bootstrap : JavaPlugin() {
     private lateinit var loggerFactory: LoggerFactory
     private lateinit var logger: Logger
     private lateinit var commands: CommandService
+    private lateinit var events: EventService
 
     override fun onLoad() {
         try {
             injector = Guice.createInjector(
                 ConfigurationModule(this.dataFolder),
-                CommandModule()
+                CommandModule(),
+                EventModule()
             )
 
             loggerFactory = injector.getInstance(LoggerFactory::class.java)
             logger = loggerFactory.logger<Bootstrap>("NxtrIdCards")
 
             commands = injector.getInstance(CommandService::class.java)
+            events = injector.getInstance(EventService::class.java)
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -41,12 +46,12 @@ class Bootstrap : JavaPlugin() {
             logger.error("PlaceholderAPI is not installed, may cause errors!")
         }
 
-        if (this.server.pluginManager.getPlugin("FancyDialogs") == null) {
-            logger.error("FancyDialogs is not installed, may cause errors!")
-        }
-
         if (::commands.isInitialized) {
             commands.register(this)
+        }
+
+        if (::events.isInitialized) {
+            events.register(this)
         }
 
         logger.info("NxtrIdCards is enabled!")
