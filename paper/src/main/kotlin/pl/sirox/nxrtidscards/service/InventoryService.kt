@@ -1,9 +1,8 @@
-package pl.sirox.nxrtidscards.util
+package pl.sirox.nxrtidscards.service
 
 import com.google.inject.Inject
 import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
-import dev.triumphteam.gui.guis.Gui.gui
 import dev.triumphteam.gui.guis.GuiItem
 import me.clip.placeholderapi.PlaceholderAPI
 import net.kyori.adventure.text.minimessage.MiniMessage
@@ -13,7 +12,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import pl.sirox.common.configuration.InventoryConfiguration
 
-class InventoryUtil @Inject constructor(
+class InventoryService @Inject constructor(
     private val inventoryConfiguration: InventoryConfiguration
 ) {
 

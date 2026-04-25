@@ -6,16 +6,16 @@ import dev.rollczi.litecommands.annotations.context.Context
 import dev.rollczi.litecommands.annotations.execute.Execute
 import org.bukkit.entity.Player
 import pl.sirox.nxrtidscards.interfaces.CustomCommand
-import pl.sirox.nxrtidscards.util.InventoryUtil
+import pl.sirox.nxrtidscards.service.InventoryService
 
 @Command(name = "showid")
 class ShowCommand @Inject constructor(
-    private val inventoryUtil: InventoryUtil
+    private val inventoryService: InventoryService
 ) : CustomCommand {
 
     @Execute
     fun executeShow(@Context sender: Player) {
-        inventoryUtil.showIdInventoryNearby(sender)
+        inventoryService.showIdInventoryNearby(sender)
     }
 
 }

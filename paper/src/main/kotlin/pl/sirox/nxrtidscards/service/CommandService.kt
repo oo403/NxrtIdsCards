@@ -1,4 +1,4 @@
-package pl.sirox.nxrtidscards.util
+package pl.sirox.nxrtidscards.service
 
 import com.google.inject.Inject
 import dev.rollczi.litecommands.LiteCommands
@@ -12,7 +12,7 @@ import pl.sirox.nxrtidscards.argument.ConfigurationFilesArgument
 import pl.sirox.nxrtidscards.bootstrap.Bootstrap
 import pl.sirox.nxrtidscards.interfaces.CustomCommand
 
-class CommandUtil @Inject constructor(
+class CommandService @Inject constructor(
     private val loggerFactory: LoggerFactory,
     private val commands: Set<CustomCommand>,
     private val generalConfiguration: GeneralConfiguration
@@ -20,7 +20,7 @@ class CommandUtil @Inject constructor(
 
     private lateinit var liteCommands: LiteCommands<CommandSender>
 
-    private val logger = loggerFactory.logger<CommandUtil>()
+    private val logger = loggerFactory.logger<CommandService>()
 
     fun register(plugin: Bootstrap) {
         try {
