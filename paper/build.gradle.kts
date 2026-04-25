@@ -8,8 +8,6 @@ dependencies {
 
     compileOnly("me.clip:placeholderapi:2.12.2")
 
-    compileOnly("de.oliver:FancyDialogs:1.2.0")
-
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("com.google.inject:guice:7.0.0")
     implementation("org.reflections:reflections:0.10.2")
@@ -48,7 +46,6 @@ tasks {
 
         downloadPlugins {
             modrinth("placeholderapi", "2.12.2")
-            modrinth("fancydialogs", "1.2.0")
         }
     }
 
