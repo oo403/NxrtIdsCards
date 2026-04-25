@@ -16,4 +16,7 @@ class DialogConfiguration : OkaeriConfig() {
     var ageTitle: String = "Age"
     var agePlaceholder: String = "%s: %s"
 
+    var button: String = "Create"
+    var buttonTooltip: String = "Create your ID"
+
 }
