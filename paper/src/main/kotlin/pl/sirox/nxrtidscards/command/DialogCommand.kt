@@ -24,12 +24,6 @@ class DialogCommand @Inject constructor(
     @Permission("nxrtidscards.admin.showiddialog")
     fun executeDialog(@Context sender: CommandSender, @Arg("player") player: Player) {
         dialogService.showDialog(player)
-
-        player.sendMessage(
-            Component.text("Name: " + playerService.getName(player.uniqueId) + "\n" +
-                    "Surname: " + playerService.getSurname(player.uniqueId) + "\n" +
-                    "Age: " + playerService.getAge(player.uniqueId)
-            ))
     }
 
 }
