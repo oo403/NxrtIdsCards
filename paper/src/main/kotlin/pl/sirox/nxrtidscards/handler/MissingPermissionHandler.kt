@@ -22,6 +22,7 @@ class MissingPermissionHandler @Inject constructor(
         multificationService.create()
             .viewer(invocation!!.sender())
             .notice(messagesConfiguration.missingPermissionsMessage)
+            .placeholder("{PERMISSIONS}", missingPermissions!!.permissions.joinToString(", "))
             .send()
     }
 
