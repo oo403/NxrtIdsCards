@@ -2,16 +2,25 @@ package pl.sirox.nxrtidscards.service
 
 import com.google.inject.Inject
 import io.papermc.paper.dialog.Dialog
+import io.papermc.paper.dialog.DialogResponseView
+import io.papermc.paper.registry.data.dialog.ActionButton
 import io.papermc.paper.registry.data.dialog.DialogBase
+import io.papermc.paper.registry.data.dialog.action.DialogAction
+import io.papermc.paper.registry.data.dialog.action.DialogActionCallback
 import io.papermc.paper.registry.data.dialog.body.DialogBody
 import io.papermc.paper.registry.data.dialog.input.DialogInput
 import io.papermc.paper.registry.data.dialog.type.DialogType
+import net.kyori.adventure.audience.Audience
+import net.kyori.adventure.text.event.ClickCallback
 import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import org.bukkit.entity.Player
 import pl.sirox.common.configuration.DialogConfiguration
 
+
 class DialogService @Inject constructor(
-    private val dialogConfiguration: DialogConfiguration
+    private val dialogConfiguration: DialogConfiguration,
+    private val playerService: PlayerService
 ) {
 
     private val mini = MiniMessage.miniMessage()
@@ -27,12 +36,36 @@ class DialogService @Inject constructor(
     private val ageTitle: String get() = dialogConfiguration.ageTitle
     private val agePlaceholder: String get() = dialogConfiguration.agePlaceholder
 
+    private val button: String get() = dialogConfiguration.button
+    private val buttonTooltip: String get() = dialogConfiguration.buttonTooltip
+
     fun showDialog(target: Player) {
 
         val dialog = Dialog.create { builder ->
             builder
                 .empty()
-                .type(DialogType.notice())
+                .type(DialogType.notice(
+                    ActionButton.create(
+                        mini.deserialize(button),
+                        mini.deserialize(buttonTooltip),
+                        100,
+                        DialogAction.customClick(
+                            DialogActionCallback { view: DialogResponseView?, audience: Audience? ->
+                                val name = view!!.getText("name") ?: "Unknown"
+                                val surname = view!!.getText("surname") ?: "Unknown"
+                                val age = view!!.getFloat("age")?.toInt() ?: 0
+
+                                playerService.setName(target.uniqueId, name)
+                                playerService.setSurname(target.uniqueId, surname)
+                                playerService.setAge(target.uniqueId, age)
+                            },
+                            ClickCallback.Options.builder()
+                                .uses(100)
+                                .lifetime(ClickCallback.DEFAULT_LIFETIME)
+                                .build()
+                        )
+                    )
+                ))
                 .base(
                     DialogBase.builder(mini.deserialize(title))
                         .body(listOf(
