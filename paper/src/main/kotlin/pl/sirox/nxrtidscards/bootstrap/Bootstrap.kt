@@ -45,10 +45,6 @@ class Bootstrap : JavaPlugin() {
             logger.error("FancyDialogs is not installed, may cause errors!")
         }
 
-        if (this.server.pluginManager.getPlugin("FancyNpcs") == null) {
-            logger.error("FancyNpcs is not installed, may cause errors!")
-        }
-
         if (::commands.isInitialized) {
             commands.register(this)
         }

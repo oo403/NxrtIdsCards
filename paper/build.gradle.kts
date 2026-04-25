@@ -49,7 +49,6 @@ tasks {
         downloadPlugins {
             modrinth("placeholderapi", "2.12.2")
             modrinth("fancydialogs", "1.2.0")
-            modrinth("fancynpcs", "2.10.0")
         }
     }
 
