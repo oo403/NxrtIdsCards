@@ -1,4 +1,4 @@
-package pl.sirox.common.util
+package pl.sirox.common.service
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -8,7 +8,7 @@ import pl.sirox.common.configuration.MessagesConfiguration
 import pl.sirox.common.enums.ConfigurationFiles
 
 @Singleton
-class ConfigurationUtil @Inject constructor(
+class ConfigurationService @Inject constructor(
     private val generalConfiguration: GeneralConfiguration,
     private val messageConfiguration: MessagesConfiguration,
     private val inventoryConfiguration: InventoryConfiguration

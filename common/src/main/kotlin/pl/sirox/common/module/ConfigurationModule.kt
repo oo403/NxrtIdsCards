@@ -3,13 +3,12 @@ package pl.sirox.common.module
 import com.eternalcode.multification.okaeri.MultificationSerdesPack
 import com.google.inject.AbstractModule
 import eu.okaeri.configs.ConfigManager
-import eu.okaeri.configs.serdes.commons.SerdesCommons
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer
 import pl.sirox.common.configuration.DialogConfiguration
 import pl.sirox.common.configuration.GeneralConfiguration
 import pl.sirox.common.configuration.InventoryConfiguration
 import pl.sirox.common.configuration.MessagesConfiguration
-import pl.sirox.common.util.MultificationUtil
+import pl.sirox.common.service.MultificationService
 import java.io.File
 
 class ConfigurationModule(
@@ -21,7 +20,7 @@ class ConfigurationModule(
     val inventoryConfigurationFile = File(dataFolder, "inventory.yml")
     val dialogConfigurationFile = File(dataFolder, "dialog.yml")
 
-    private val multification = MultificationUtil(MessagesConfiguration())
+    private val multification = MultificationService(MessagesConfiguration())
 
     override fun configure() {
         val generalConfiguration = ConfigManager.create(GeneralConfiguration::class.java, { init ->

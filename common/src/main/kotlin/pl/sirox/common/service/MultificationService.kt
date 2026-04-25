@@ -1,4 +1,4 @@
-package pl.sirox.common.util
+package pl.sirox.common.service
 
 import com.eternalcode.multification.adventure.AudienceConverter
 import com.eternalcode.multification.paper.PaperMultification
@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender
 import pl.sirox.common.configuration.MessagesConfiguration
 
 
-class MultificationUtil @Inject constructor(
+class MultificationService @Inject constructor(
     private val messagesConfig: MessagesConfiguration
 ) : PaperMultification<MessagesConfiguration>() {
 

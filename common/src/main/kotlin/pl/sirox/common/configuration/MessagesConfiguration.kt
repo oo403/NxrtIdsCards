@@ -12,4 +12,8 @@ class MessagesConfiguration : OkaeriConfig() {
     var reloadMessage: Notice = Notice.builder()
         .chat("<#AAAAAA>[<#5DF083>✔<#AAAAAA>] Reloaded {CONFIG} config!")
         .build()
+
+    var missingPermissionsMessage: Notice = Notice.builder()
+        .chat("<#AAAAAA>[<#5DF083>✔<#AAAAAA>] Missing permissions: {PERMISSIONS}")
+        .build()
 }

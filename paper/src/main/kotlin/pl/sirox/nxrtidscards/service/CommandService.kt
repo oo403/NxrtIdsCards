@@ -10,12 +10,14 @@ import pl.sirox.common.logging.LoggerFactory
 import pl.sirox.common.logging.logger
 import pl.sirox.nxrtidscards.argument.ConfigurationFilesArgument
 import pl.sirox.nxrtidscards.bootstrap.Bootstrap
+import pl.sirox.nxrtidscards.handler.MissingPermissionHandler
 import pl.sirox.nxrtidscards.interfaces.CustomCommand
 
 class CommandService @Inject constructor(
     private val loggerFactory: LoggerFactory,
     private val commands: Set<CustomCommand>,
-    private val generalConfiguration: GeneralConfiguration
+    private val generalConfiguration: GeneralConfiguration,
+    private val missingPermissionHandler: MissingPermissionHandler
 ) {
 
     private lateinit var liteCommands: LiteCommands<CommandSender>
@@ -26,6 +28,7 @@ class CommandService @Inject constructor(
         try {
             this.liteCommands = LiteBukkitFactory.builder("nxrtidscards", plugin)
                 .commands(commands)
+                .missingPermission(missingPermissionHandler)
                 .argument(ConfigurationFiles::class.java, ConfigurationFilesArgument())
                 .build()
 
