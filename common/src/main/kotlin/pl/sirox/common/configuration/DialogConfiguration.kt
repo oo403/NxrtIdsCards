@@ -14,5 +14,6 @@ class DialogConfiguration : OkaeriConfig() {
     var surnamePlaceholder: String = "Enter your surname"
 
     var ageTitle: String = "Age"
+    var agePlaceholder: String = "%s: %s"
 
 }

@@ -23,7 +23,9 @@ class DialogService @Inject constructor(
 
     private val surnameTitle: String get() = dialogConfiguration.surnameTitle
     private val surnamePlaceholder: String get() = dialogConfiguration.surnamePlaceholder
+
     private val ageTitle: String get() = dialogConfiguration.ageTitle
+    private val agePlaceholder: String get() = dialogConfiguration.agePlaceholder
 
     fun showDialog(target: Player) {
 
@@ -47,7 +49,7 @@ class DialogService @Inject constructor(
                                 .step(1F)
                                 .initial(18F)
                                 .width(300)
-                                .labelFormat("%s: %s")
+                                .labelFormat(agePlaceholder)
                                 .build()
                         ))
                         .build()
