@@ -151,7 +151,7 @@ class DatabaseService @Inject constructor(
     }
 
     fun autoDataSave() {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, Runnable {
             val players = Bukkit.getOnlinePlayers()
 
             players.forEach { player ->
@@ -164,7 +164,7 @@ class DatabaseService @Inject constructor(
                     addPlayer(uuid, name, surname, age)
                 }
             }
-        })
+        }, 0L, 12000L)
     }
 
     fun unregister() {
