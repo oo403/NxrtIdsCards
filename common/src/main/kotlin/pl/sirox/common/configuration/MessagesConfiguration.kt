@@ -14,6 +14,10 @@ class MessagesConfiguration : OkaeriConfig() {
         .build()
 
     var missingPermissionsMessage: Notice = Notice.builder()
-        .chat("<#AAAAAA>[<#5DF083>✔<#AAAAAA>] Missing permissions: {PERMISSIONS}")
+        .chat("<#AAAAAA>[<#F03C3C>✘<#AAAAAA>] Missing permissions: {PERMISSIONS}")
+        .build()
+
+    var invalidUsageMessage: Notice = Notice.builder()
+        .chat("<#AAAAAA>[<#F03C3C>✘<#AAAAAA>] Invalid usage: {ERROR}")
         .build()
 }
