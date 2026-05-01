@@ -70,16 +70,12 @@ class InventoryService @Inject constructor(
         return gui
     }
 
-    fun showIdInventoryNearby(owner: Player) {
+    fun showIdInventory(owner: Player, target: Player) {
         val gui = buildIdInventory(owner)
+
         gui.open(owner)
 
-        val ownerLoc = owner.location
-        val playersInDistance = ownerLoc.world.getNearbyPlayers(ownerLoc, 10.0, 10.0, 10.0)
-
-        playersInDistance.forEach { player ->
-            gui.open(player)
-        }
+        gui.open(target)
     }
 
 }

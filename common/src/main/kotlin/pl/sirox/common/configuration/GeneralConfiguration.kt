@@ -6,4 +6,6 @@ class GeneralConfiguration : OkaeriConfig() {
 
     var debug: Boolean = false
 
+    var showIdRequestTime: Int = 30
+
 }

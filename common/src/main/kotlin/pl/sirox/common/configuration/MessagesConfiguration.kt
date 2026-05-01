@@ -20,4 +20,8 @@ class MessagesConfiguration : OkaeriConfig() {
     var invalidUsageMessage: Notice = Notice.builder()
         .chat("<#AAAAAA>[<#F03C3C>✘<#AAAAAA>] Invalid usage: {ERROR}")
         .build()
+
+    val showIdRequest: Notice = Notice.builder()
+        .chat("<#AAAAAA>[<#5DF083>✔<#AAAAAA>] {PLAYER} wants to see your ID, type /showid accept to accept!")
+        .build()
 }
