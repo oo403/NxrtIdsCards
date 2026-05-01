@@ -51,6 +51,17 @@ class InventoryService @Inject constructor(
                                 gui.close(event.whoClicked)
                             }
                         }
+                        "command" -> {
+                            gui.addSlotAction(slot) { event ->
+                                event.whoClicked.server.dispatchCommand(event.whoClicked, PlaceholderAPI.setPlaceholders(owner, action.actionValue))
+                            }
+                        }
+                        "message" -> {
+                            gui.addSlotAction(slot) { event ->
+                                event.whoClicked.sendMessage(PlaceholderAPI.setPlaceholders(owner, action.actionValue))
+                            }
+                        }
+                        else -> throw IllegalArgumentException("Unknown action type: ${action.actionType}")
                     }
                 }
             }
